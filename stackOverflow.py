@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import pandas as pd
+import pymongo
 
 res = requests.get("https://stackoverflow.com/questions")
 soup = BeautifulSoup(res.text, "html.parser")
@@ -38,4 +39,10 @@ json_data = json.dumps(questions_data)
 print(json_data)
 print(count)
 
-pd.read_json(json_data).to_csv("output.csv")
+client = pymongo.MongoClient("mongodb://localhost:27017/")
+
+dbName = client["stackoverflowscrap"]
+collection = dbName["stackoverflowdata"]
+collection.insert_one(questions_data)
+
+# pd.read_json(json_data).to_csv("output.csv")
