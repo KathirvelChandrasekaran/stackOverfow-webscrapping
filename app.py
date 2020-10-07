@@ -1,6 +1,5 @@
 from flask import Flask
 from flask import jsonify
-from flask import request
 from flask_pymongo import PyMongo
 from api_constants import password, db_name
 
@@ -12,28 +11,6 @@ app.config['MONGO_DBNAME'] = db_name
 app.config['MONGO_URI'] = db_uri
 
 mongo = PyMongo(app)
-
-
-# class Questions(db.Document):
-#     doc_id = db.StringField()
-#     question = db.StringField()
-#     views = db.StringField()
-#     vote_count = db.IntField()
-#     post_tag = db.StringField()
-#     asked_by = db.StringField()
-#     avatar = db.StringField()
-#
-#     def to_json(self):
-#         return {
-#             "doc_id": self.doc_id,
-#             "question": self.question,
-#             "views": self.views,
-#             "vote_count": self.vote_count,
-#             "post_tag": self.post_tag,
-#             "asked_by": self.asked_by,
-#             "avatar": self.avatar
-#         }
-
 
 @app.route('/api/test', methods=["GET"])
 def test():
